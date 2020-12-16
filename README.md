@@ -23,3 +23,7 @@ It was built using a P200 camera running the BETA firmware "BirdDog P200 A2_A3 2
 I am giving out this app for free for people to play with, and the source code is publically available via this GitHub repository. I accept no responsibility for how it affects your hardware (It shouldn't) or your software on your machines (It also shouldn't).
 
 If you find any bugs in this software, or would like to see more features displayed, please email me at development@newsworthyvision.com
+
+### Installation
+
+This MUST be run on a local machine, querying a networked P200 camera. Due to the insecure nature of the BirdDog API on the camera, this cannot be run online, as much as I would like it to be. Please send me an email if youn would like a ZIP file with the built application.
