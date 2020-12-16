@@ -5,8 +5,8 @@ function Footer() {
     return (
         <div>
             <footer style={footerStyle}>
-                <p>BirdDog P200 VSD - © Newsworthy Vision Ltd. 2020, <a href="mailto:development@newsworthyvision.com" target="_blank" rel="noopener noreferrer">development@newsworthyvision.com</a>
-                </p>
+                <p>BirdDog P200 VSD - © Newsworthy Vision Ltd. 2020, <a href="mailto:development@newsworthyvision.com" target="_blank" rel="noopener noreferrer">development@newsworthyvision.com </a>
+                 - Source code: <a href="https://github.com/Newsworthy/birddog-P200-VSD">GitHub</a></p>
             </footer>
         </div>
     )

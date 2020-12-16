@@ -393,7 +393,6 @@ class App extends Component {
         connected: false,
       })
     } else {
-      console.log("Working fine.");
       this.setState({
         connected: true,
       })
