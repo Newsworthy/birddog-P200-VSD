@@ -31,7 +31,6 @@ class App extends Component {
   }
 
   loadAVData = async () => {
-    //   console.log("AV");
     const sector = 'birddogavsetup';
     this.setState({
       loading: true,
@@ -39,7 +38,6 @@ class App extends Component {
     try {
       const result = await axios
         .get(this.state.url + ':' + this.state.port + '/' + sector)
-      // console.log(result);
       this.setState({
         av: result.data,
         loading: false,
@@ -58,7 +56,6 @@ class App extends Component {
   };
 
   loadWBData = async () => {
-    // console.log("WB");
     const sector = 'birddogwbsetup';
     this.setState({
       loading: true,
@@ -66,7 +63,6 @@ class App extends Component {
     try {
       const result = await axios
         .get(this.state.url + ':' + this.state.port + '/' + sector)
-      // console.log(result);
       this.setState({
         wb: result.data,
         loading: false,
@@ -86,7 +82,6 @@ class App extends Component {
   };
 
   loadEXPData = async () => {
-    // console.log("EXP");
     const sector = 'birddogexpsetup';
     this.setState({
       loading: true,
@@ -113,7 +108,6 @@ class App extends Component {
   };
 
   loadPIC1Data = async () => {
-    // console.log("PIC1");
     const sector = 'birddogpic1setup';
     this.setState({
       loading: true,
@@ -121,7 +115,6 @@ class App extends Component {
     try {
       const result = await axios
         .get(this.state.url + ':' + this.state.port + '/' + sector)
-      // console.log(result);
       this.setState({
         pic1: result.data,
         loading: false,
@@ -141,7 +134,6 @@ class App extends Component {
   };
 
   loadPIC2Data = async () => {
-    // console.log("PIC2");
     const sector = 'birddogpic2setup';
     this.setState({
       loading: true,
@@ -149,8 +141,6 @@ class App extends Component {
     try {
       const result = await axios
         .get(this.state.url + ':' + this.state.port + '/' + sector)
-      // console.log(result);
-
       this.setState({
         pic2: result.data,
         loading: false,
@@ -170,76 +160,6 @@ class App extends Component {
     }
   };
 
-  // displayAVData = () => {
-  //   const av = this.state.av;
-  //   const avList = Object.entries(av).map(([key, value]) => {
-  //     return (
-  //       <div>
-  //         <ul>
-  //           <li key={key} item={value}>{key} - {value}</li>
-  //         </ul>
-  //       </div>
-  //     );
-  //   })
-  //   return avList;
-  // }
-
-  displayWBData = () => {
-    const wb = this.state.wb;
-    const wbList = Object.entries(wb).map(([key, value]) => {
-      return (
-        <div>
-          <ul>
-            <li key={key} item={value}>{key} - {value}</li>
-          </ul>
-        </div>
-      );
-    })
-    return wbList;
-  }
-
-  displayEXPData = () => {
-    const exp = this.state.exp;
-    const expList = Object.entries(exp).map(([key, value]) => {
-      return (
-        <div>
-          <ul>
-            <li key={key} item={value}>{key} - {value}</li>
-          </ul>
-        </div>
-      );
-    })
-    return expList;
-  }
-
-  displayPIC1Data = () => {
-    const pic1 = this.state.pic1;
-    const pic1List = Object.entries(pic1).map(([key, value]) => {
-      return (
-        <div>
-          <ul>
-            <li key={key} item={value}>{key} - {value}</li>
-          </ul>
-        </div>
-      );
-    })
-    return pic1List;
-  }
-
-  displayPIC2Data = () => {
-    const pic2 = this.state.pic2;
-    const pic2List = Object.entries(pic2).map(([key, value]) => {
-      return (
-        <div>
-          <ul>
-            <li key={key} item={value}>{key} - {value}</li>
-          </ul>
-        </div>
-      );
-    })
-    return pic2List;
-  }
-
   regionSelector = () => {
     const resolution = this.state.av.av_ndivideo;
     const arr50 = ["1080p50", "1080p25", "1080i50", "720p50"]
@@ -254,19 +174,12 @@ class App extends Component {
     }
   }
 
-  loadingHandler() {
-    this.setState({
-
-    })
-  }
-
   componentDidMount() {
     clearInterval(this.interval);
     this.setState({
       error: '',
       connected: false,
       loading: false,
-
     })
   }
 
@@ -367,12 +280,13 @@ class App extends Component {
     }
     return (
       <>
-        <Col xs="6">
-          <h6 className="categorySubTitle">Exposure</h6>
-        </Col>
-        <Col xs="6">
-          <Button size="sm" variant="success">{expModeList[this.state.exp.exp_camexpm]}</Button>
-        </Col>
+        <Form>
+          <Form.Group controlId="Camera_Exposure_Mode">
+            <Form.Label><Col><h6 className="categorySubTitle">Exposure</h6></Col></Form.Label>
+            <Form.Control type="text" defaultValue={expModeList[this.state.exp.exp_camexpm]} readOnly>
+            </Form.Control>
+          </Form.Group>
+        </Form>
       </>
     )
   }
@@ -508,7 +422,6 @@ class App extends Component {
   render() {
     const url = this.state.url;
     return (
-
       <div>
         <Container>
           <Row style={{ height: "150px" }} className="App-header d-flex align-items-center">

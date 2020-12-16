@@ -8,6 +8,8 @@ This is a project built in React, so it will work on any browser, on any device.
 
 It only receives information from the camera, and does not send information to it. No camera settings can or will be modified by this app whatsoever.
 
+It was built using a P200 camera running the BETA firmware "BirdDog P200 A2_A3 20.12.3374" - As a result, your experience may be different to mine. I would love to see the results from other firmwares if you have errors.
+
 ### Known Bugs
 
 - When adjusting settings from the PTZ keyboard, results may take up to five seconds to display on the VSD. To quote BirdDog support: "The Keyboard is not talking the new encode language yet we made for the Camera lineup, so this should be rolled into the next update, whenever that officially gets released." As of December 2020, this hasn't happened yet.
