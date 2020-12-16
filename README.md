@@ -2,6 +2,8 @@
 
 I built this tiny app because I found when using the PTZ Keyboard provided by BirdDog with the P200 camera, it doesn't display the settings values when you adjust them. As a broadcast camera operator, this isn't really acceptable. I don't want to be guessing iris levels, and definitely not shutter speeds.
 
+Also, sometimes it's just good to know if you've accidentally engaged the IR cut function, or mirrored/flipped the camera.
+
 ## So I built the "BirdDog P200 VSD"
 
 This is a project built in React, so it will work on any browser, on any device.
@@ -16,4 +18,4 @@ It was built using a P200 camera running the BETA firmware "BirdDog P200 A2_A3 2
 
 - The Gain Limit display will frequently display an error. This is due to the API returning an out of range number instead of the actual value. Turns out I found a bug in the P200 API that I have reported, and will hopefully be fixed in the future.
 
-If you find any bugs in this software, please email me at development@newsworthyvision.com
+If you find any bugs in this software, or would like to see more features displayed, please email me at development@newsworthyvision.com
