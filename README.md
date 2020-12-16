@@ -27,3 +27,5 @@ If you find any bugs in this software, or would like to see more features displa
 ### Installation
 
 This MUST be run on a local machine, querying a networked P200 camera. Due to the insecure nature of the BirdDog API on the camera, this cannot be run online, as much as I would like it to be. Please send me an email if youn would like a ZIP file with the built application.
+
+To install this yourself, you will need to download the code above, and then run the "npm run build" command yourself. If you don't know what that is, then email me. :)
