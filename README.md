@@ -32,6 +32,6 @@ To install this yourself, you will need to download the code above, and then run
 
 #### Changelog
 
-v0.1.1
+v0.1.1 - 16/12/2020
 - First serious upload
 - Retooled the Connect/Disconnect functions, now no longer lies to you saying that it is connected when it isn't. Especially with IP's that aren't BirdDogs.
