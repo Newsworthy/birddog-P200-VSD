@@ -281,8 +281,8 @@ class App extends Component {
     return (
       <>
         <Form>
-          <Form.Group controlId="Camera_Exposure_Mode">
-            <Form.Label><Col><h6 className="categorySubTitle">Exposure</h6></Col></Form.Label>
+          <Form.Group as={Col} controlId="Camera_Exposure_Mode">
+            <Form.Label><h6 className="categorySubTitle">Exposure</h6></Form.Label>
             <Form.Control type="text" defaultValue={expModeList[this.state.exp.exp_camexpm]} readOnly>
             </Form.Control>
           </Form.Group>
