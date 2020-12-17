@@ -28,7 +28,7 @@ If you find any bugs in this software, or would like to see more features displa
 
 You can now simply run the .exe file and install it on any Windows machine on the same network subnet as your BirdDog camera. 
 
-Here is the file: {insert Dropbox link}
+You can find the .exe file in the releases section, as well as the original React build that allows you to run this in any browser.
 
 #### Changelog
 
