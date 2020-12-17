@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert, Spinner, InputGroup, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import './App.css';
@@ -37,7 +37,7 @@ class App extends Component {
     });
     try {
       const result = await axios
-        .get(this.state.url + ':' + this.state.port + '/' + sector)
+        .get('http://' + this.state.url + ':' + this.state.port + '/' + sector)
       this.setState({
         av: result.data,
         loading: false,
@@ -62,7 +62,7 @@ class App extends Component {
     });
     try {
       const result = await axios
-        .get(this.state.url + ':' + this.state.port + '/' + sector)
+        .get('http://' + this.state.url + ':' + this.state.port + '/' + sector)
       this.setState({
         wb: result.data,
         loading: false,
@@ -88,7 +88,7 @@ class App extends Component {
     });
     try {
       const result = await axios
-        .get(this.state.url + ':' + this.state.port + '/' + sector)
+        .get('http://' + this.state.url + ':' + this.state.port + '/' + sector)
       this.setState({
         exp: result.data,
         loading: false,
@@ -114,7 +114,7 @@ class App extends Component {
     });
     try {
       const result = await axios
-        .get(this.state.url + ':' + this.state.port + '/' + sector)
+        .get('http://' + this.state.url + ':' + this.state.port + '/' + sector)
       this.setState({
         pic1: result.data,
         loading: false,
@@ -140,7 +140,7 @@ class App extends Component {
     });
     try {
       const result = await axios
-        .get(this.state.url + ':' + this.state.port + '/' + sector)
+        .get('http://' + this.state.url + ':' + this.state.port + '/' + sector)
       this.setState({
         pic2: result.data,
         loading: false,
@@ -189,18 +189,18 @@ class App extends Component {
     const ntscShutterSpeed = ["1/1", "1/2", "1/4", "1/8", "1/15", "1/30", "1/60", "1/90", "1/100", "1/125", "1/180", "1/250", "1/350", "1/500", "1/725", "1/1000", "1/1500", "1/2000", "1/3000", "1/4000", "1/6000", "1/10000"]
     if (region === "50") {
       return (
-        <Form>
+        <Form as={Col}>
           <Form.Group controlId="shutterRangePAL">
-            <Form.Label><h4 className="categorySubTitle">Speed </h4><h5>{palShutterSpeed[this.state.exp.exp_camspeed]}</h5></Form.Label>
+            <Form.Label><h4 className="categorySubTitle">Shutter Speed </h4><h5>{palShutterSpeed[this.state.exp.exp_camspeed]}</h5></Form.Label>
             <Form.Control type="range" min="0" max="22" value={this.state.exp.exp_camspeed} />
           </Form.Group>
         </Form>
       )
     } else {
       return (
-        <Form>
+        <Form as={Col}>
           <Form.Group controlId="shutterRangeNTSC">
-            <Form.Label><h4 className="categorySubTitle">Speed </h4><h5>{ntscShutterSpeed[this.state.exp.exp_camspeed]}</h5></Form.Label>
+            <Form.Label><h4 className="categorySubTitle">Shutter Speed </h4><h5>{ntscShutterSpeed[this.state.exp.exp_camspeed]}</h5></Form.Label>
             <Form.Control type="range" min="0" max="22" value={this.state.exp.exp_camspeed} />
           </Form.Group>
         </Form>)
@@ -210,7 +210,7 @@ class App extends Component {
   irisHandler = () => {
     const irisArr = ["Closed", "f/14", "f/11", "f/9.6", "f/8.0", "f/6.8", "f/5.6", "f/4.8", "f/4.0", "f/3.4", "f/2.8", "f/2.4", "f/2.0", "f/1.6"];
     return (
-      <Form>
+      <Form as={Col}>
         <Form.Group controlId="apertureRange">
           <Form.Label><h4 className="categorySubTitle">Iris </h4><h5>{irisArr[this.state.exp.exp_camiris - 4]}</h5></Form.Label>
           <Form.Control type="range" min="4" max="17" value={this.state.exp.exp_camiris} />
@@ -222,12 +222,12 @@ class App extends Component {
   gainHandler = () => {
     const gainArr = [0, 3.6, 7.1, 10.7, 14.3, 17.8, 21.4, 25, 28.6, 32.1, 35.7, 39.3, 42.8, 46.4, 50]
     return (
-      <Form>
-        <Form.Group controlId="gainRangeForm">
-          <Form.Label><h4 className="categorySubTitle">Gain</h4> <h5>{gainArr[this.state.exp.exp_camgain - 1]}dB</h5></Form.Label>
-          <Form.Control type="range" min="1" max="15" value={this.state.exp.exp_camgain} />
-        </Form.Group>
-      </Form>
+          <Form as={Col}>
+            <Form.Group controlId="gainRangeForm">
+              <Form.Label><h4 className="categorySubTitle">Gain</h4> <h5>{gainArr[this.state.exp.exp_camgain - 1]}dB</h5></Form.Label>
+              <Form.Control type="range" min="1" max="15" value={this.state.exp.exp_camgain} />
+            </Form.Group>
+          </Form>
     )
   }
 
@@ -235,7 +235,7 @@ class App extends Component {
     const maxGainArr = [10.7, 14.3, 17.8, 21.4, 25, 28.6, 32.1, 35.7, 39.3, 42.8, 46.4, 50]
     const gainLimit = parseInt(this.state.exp.exp_camgainlimit);
     return (
-      <Form>
+      <Form as={Col}>
         <Form.Group controlId="gainLimitRangeForm">
           <Form.Label><h4 className="categorySubTitle">Gain limit</h4><h5>{gainLimit < 4 ? <>Error</> : <>{maxGainArr[gainLimit - 4]}dB</>}</h5></Form.Label>
           <Form.Control type="range" min="4" max="15" value={gainLimit} />
@@ -257,15 +257,35 @@ class App extends Component {
       "SLV": "Sodium Vapour Lamp Manual",
       "SLV-OUTDOOR-AUTO": "Sodium Vapour Lamp Outdoor",
     }
+    let redGain = this.state.wb.wb_camredgain;
+    let blueGain = this.state.wb.wb_cambluegain;
     return (
-      <Form>
-        <Form.Group controlId="Camera_White_Balance_Mode">
-          <Form.Label><h4 className="categorySubTitle">WB Mode</h4></Form.Label>
-          <Form.Control type="text" defaultValue={wbList[this.state.wb.wb_camwb]} readOnly>
-          </Form.Control>
-          {this.state.wb.wb_camwb === "MANUAL" ? <><Row>Camera Red Gain - {this.state.wb.wb_camredgain}</Row><Row>Camera Blue Gain - {this.state.wb.wb_cambluegain}</Row></> : <></>}
-        </Form.Group>
-      </Form>
+      <div>
+        <label htmlFor="WB-Mode"><h4 className="categorySubTitle">WB Mode</h4></label>
+        <InputGroup as={Col} className="mb-3">
+          <FormControl
+            id="WB-Mode"
+            placeholder={wbList[this.state.wb.wb_camwb]}
+            defaultValue={wbList[this.state.wb.wb_camwb]}
+            readOnly
+          />
+        </InputGroup>
+        {this.state.wb.wb_camwb === "MANUAL" ? <>
+          <Form>
+            <Form.Group as={Col} controlId="redGainLimitRangeForm">
+              <Form.Label><h6 className="categorySubTitle">Red Gain</h6><h6>{redGain}</h6></Form.Label>
+              <Form.Control type="range" min="0" max="255" value={redGain} />
+            </Form.Group>
+          </Form>
+          <Form>
+            <Form.Group as={Col} controlId="blueGainLimitRangeForm">
+              <Form.Label><h6 className="categorySubTitle">Blue Gain</h6><h6>{blueGain}</h6></Form.Label>
+              <Form.Control type="range" min="0" max="255" value={blueGain} />
+            </Form.Group>
+          </Form>
+        </> : <></>}
+
+      </div>
     )
   }
 
@@ -294,10 +314,10 @@ class App extends Component {
   highSensModeHandler = () => {
     return (
       <>
-        <Col xs="6">
-          <h6 className="categorySubTitle">High<br />Sensitivity</h6>
+        <Col xs={12}>
+          <h6 className="categorySubTitle">High Sensitivity</h6>
         </Col>
-        <Col xs="6">
+        <Col xs={12}>
           {this.state.exp.exp_camhighsens === "hson" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
         </Col>
       </>
@@ -307,10 +327,10 @@ class App extends Component {
   IRCutHandler = () => {
     return (
       <>
-        <Col xs="6">
+        <Col xs={12}>
           <h6 className="categorySubTitle">Infra-Red</h6>
         </Col>
-        <Col xs="6">
+        <Col xs={12}>
           {this.state.pic2.pic2_camircutfil === "circfon" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
         </Col>
       </>
@@ -320,10 +340,10 @@ class App extends Component {
   bAndWHandler = () => {
     return (
       <>
-        <Col xs="6">
+        <Col xs={12}>
           <h6 className="categorySubTitle">Black & White</h6>
         </Col>
-        <Col xs="6">
+        <Col xs={12}>
           {this.state.pic1.pic1_cameffect === "efbnw" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
         </Col>
       </>
@@ -333,10 +353,10 @@ class App extends Component {
   mirrorHandler = () => {
     return (
       <>
-        <Col>
+        <Col xs={12}>
           <h6 className="categorySubTitle">Mirror</h6>
         </Col>
-        <Col xs="6">
+        <Col xs={12}>
           {this.state.pic1.pic1_cammirror === "cmon" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
         </Col>
       </>
@@ -346,21 +366,14 @@ class App extends Component {
   flipHandler = () => {
     return (
       <>
-        <Col>
+        <Col xs={12}>
           <h6 className="categorySubTitle">Flip</h6>
         </Col>
-        <Col xs="6">
+        <Col xs={12}>
           {this.state.pic1.pic1_camflip === "cfon" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
         </Col>
       </>
     )
-  }
-
-  IPChangeHandler = (event) => {
-    const tempurl = this.state.url;
-    this.setState({
-      tempurl: event.target.value,
-    });
   }
 
   connectP200 = (event) => {
@@ -417,7 +430,6 @@ class App extends Component {
     console.log("Disconnecting");
   };
 
-
   render() {
     const url = this.state.url;
     return (
@@ -427,39 +439,37 @@ class App extends Component {
             <Col xs={4}>
               BirdDog P200<br />Vital Settings Display
             </Col>
-            <Col xs={4}>
+            <Col xs={4} className="IPAddressArea">
               <Form onSubmit={this.connectP200.bind(this)}>
-                <Form.Group as={Row}>
-                  <Col xs={2}>
-                    <Form.Label>IP:</Form.Label>
-                  </Col>
-                  <Col xs={6}>
-                    <Form.Control
-                      required
-                      type="url"
-                      name="url"
-                      id="url"
-                      value={url}
-                      onChange={this.handleChange.bind(this)}
-                      placeholder="Enter URL"
-                      disabled={this.state.connected === true ? true : false}
-                    />
-
-                  </Col>
-                  <Col>
-                    {this.state.connected === false ? <Button variant="success" type="submit" size="sm">Connect</Button> : <Button variant="danger" size="sm" onClick={this.disconnect.bind(this)} >Disconnect</Button>}
-                  </Col>
+                <Form.Group as={Col}>
+                  <Row>
+                    <InputGroup className="mb-3" size="sm">
+                      <InputGroup.Prepend>
+                        <InputGroup.Text id="prepend">http://</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="text"
+                        name="url"
+                        id="url"
+                        value={url}
+                        onChange={this.handleChange.bind(this)}
+                        placeholder="Enter IP Address"
+                        disabled={this.state.connected === true ? true : false}
+                      />
+                    </InputGroup>
+                  </Row>
+                  <Row>
+                    <Col>
+                      {this.state.connected === false ? <Button variant="success" type="submit">Connect</Button> : <Button variant="danger" onClick={this.disconnect.bind(this)} >Disconnect</Button>}
+                    </Col>
+                  </Row>
                 </Form.Group>
               </Form>
             </Col>
             <Col xs={4}>
-              {this.state.initialLoad === true ? <><Alert variant="info"><Spinner animation="border" variant="info"></Spinner> Loading</Alert></> : <>{this.state.connected === false ? <><Alert variant="danger"><Spinner animation="grow" variant="danger" size="sm"></Spinner><h6 style={{ color: "red" }}>No Connection<br />{this.state.error ? <span>{this.state.error}</span> : <span></span>}</h6></Alert></> : <h6>Camera Detected<br /><Spinner animation="grow" variant="success" size="sm" /> Connected to {this.state.url}</h6>}</>
+              {this.state.initialLoad === true ? <><Alert variant="info"><Spinner animation="border" variant="info"></Spinner> Loading</Alert></> : <>{this.state.connected === false ? <><Alert variant="danger"><Spinner animation="grow" variant="danger" size="sm"></Spinner><h6 style={{ color: "red" }}>No Connection<br />{this.state.error ? <span>{this.state.error}</span> : <span></span>}</h6></Alert></> : <h6>Camera Detected<br /><Spinner animation="grow" variant="success" size="sm" /> Connected to http://{this.state.url}</h6>}</>
               }
-
             </Col>
-          </Row>
-          <Row className="mainRow">
-            <h3>Main Settings</h3>
           </Row>
 
           <Row className="cameraCategory">

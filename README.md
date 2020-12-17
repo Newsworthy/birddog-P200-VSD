@@ -1,12 +1,12 @@
 # The BirdDog P200 Vital System Display
 
-I built this tiny app because I found when using the PTZ Keyboard provided by BirdDog with the P200 camera, it doesn't display the settings values when you adjust them. As a broadcast camera operator, this isn't really acceptable. I don't want to be guessing iris levels, and definitely not shutter speeds.
+I built this app because I found when using the PTZ Keyboard provided by BirdDog with the P200 camera, it doesn't display the settings values when you adjust them. As a broadcast camera operator, this isn't really acceptable. I don't want to be guessing iris levels, and definitely not shutter speeds.
 
 Also, sometimes it's just good to know if you've accidentally engaged the IR cut function, or mirrored/flipped the camera.
 
 ## So I built the "BirdDog P200 VSD"
 
-This is a project built in React, so it will work on any browser, on any device.
+This is a project built in React, and now encapsulated within Electron. Currently this is Windows only, looking to enable it cross platform soon.
 
 It only receives information from the camera, and does not send information to it. No camera settings can or will be modified by this app whatsoever. It polls the cameras API once every second for the latest information.
 
@@ -26,11 +26,17 @@ If you find any bugs in this software, or would like to see more features displa
 
 ### Installation
 
-This MUST be run on a local machine, querying a networked P200 camera. Due to the insecure nature of the BirdDog API on the camera, this cannot be run online, as much as I would like it to be. Please send me an email if youn would like a ZIP file with the built application.
+You can now simply run the .exe file and install it on any Windows machine on the same network subnet as your BirdDog camera. 
 
-To install this yourself, you will need to download the code above, and then run the "npm run build" command yourself. If you don't know what that is, then email me. :)
+Here is the file: {insert Dropbox link}
 
 #### Changelog
+
+v0.2.1 - 17/12/2020
+- Moved App to Electron, allowing it to be run on local machines far more cleanly than the App the day before.
+- Tweaked some stuff to make it prettier
+- Altered the IP input field, you no longer need to add http:// - The prepend hopefully makes that clear
+- There is still a lot of work to go!
 
 v0.1.1 - 16/12/2020
 - First serious upload

@@ -7,7 +7,7 @@
 }
 
 .App-header {
-  padding: 15px;
+  padding: 5px;
   background-color: #282c34;
   display: flex;
   text-align: center;
@@ -28,13 +28,19 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  width: 100%
+  border: black 1px solid;
+  padding: 5px;
 }
 
 .settingWindow {
   border: black 1px solid;
   padding: 5px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
+
+
 
 
 
