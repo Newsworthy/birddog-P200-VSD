@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Form, Button, Alert, Spinner, InputGroup, FormControl } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import './App.css';
 import Footer from './components/layout/Footer';
+import Header from './components/layout/Header';
+import MasterRow from './components/layout/MasterRow';
+import WhiteBalance from './components/layout/WhiteBalance';
+import ShutterSpeed from './components/layout/ShutterSpeed';
+import Iris from './components/layout/Iris';
+import Gain from './components/layout/Gain';
+import GainLimit from './components/layout/GainLimit';
+import Exposure from './components/layout/Exposure';
+import HighSensitivity from './components/layout/HighSensitivity';
+import InfraRed from './components/layout/InfraRed';
+import BlackWhite from './components/layout/BlackWhite';
+import Mirror from './components/layout/Mirror';
+import Flip from './components/layout/Flip';
 
 class App extends Component {
   constructor(props) {
@@ -183,199 +196,6 @@ class App extends Component {
     })
   }
 
-  shutterSpeedHandler = () => {
-    let region = this.state.region;
-    const palShutterSpeed = ["1/1", "1/2", "1/3", "1/6", "1/12", "1/25", "1/50", "1/75", "1/100", "1/120", "1/150", "1/215", "1/300", "1/425", "1/600", "1/1000", "1/1250", "1/1750", "1/2500", "1/3500", "1/6000", "1/10000"]
-    const ntscShutterSpeed = ["1/1", "1/2", "1/4", "1/8", "1/15", "1/30", "1/60", "1/90", "1/100", "1/125", "1/180", "1/250", "1/350", "1/500", "1/725", "1/1000", "1/1500", "1/2000", "1/3000", "1/4000", "1/6000", "1/10000"]
-    if (region === "50") {
-      return (
-        <Form as={Col}>
-          <Form.Group controlId="shutterRangePAL">
-            <Form.Label><h4 className="categorySubTitle">Shutter Speed </h4><h5>{palShutterSpeed[this.state.exp.exp_camspeed]}</h5></Form.Label>
-            <Form.Control type="range" min="0" max="22" value={this.state.exp.exp_camspeed} />
-          </Form.Group>
-        </Form>
-      )
-    } else {
-      return (
-        <Form as={Col}>
-          <Form.Group controlId="shutterRangeNTSC">
-            <Form.Label><h4 className="categorySubTitle">Shutter Speed </h4><h5>{ntscShutterSpeed[this.state.exp.exp_camspeed]}</h5></Form.Label>
-            <Form.Control type="range" min="0" max="22" value={this.state.exp.exp_camspeed} />
-          </Form.Group>
-        </Form>)
-    };
-  }
-
-  irisHandler = () => {
-    const irisArr = ["Closed", "f/14", "f/11", "f/9.6", "f/8.0", "f/6.8", "f/5.6", "f/4.8", "f/4.0", "f/3.4", "f/2.8", "f/2.4", "f/2.0", "f/1.6"];
-    return (
-      <Form as={Col}>
-        <Form.Group controlId="apertureRange">
-          <Form.Label><h4 className="categorySubTitle">Iris </h4><h5>{irisArr[this.state.exp.exp_camiris - 4]}</h5></Form.Label>
-          <Form.Control type="range" min="4" max="17" value={this.state.exp.exp_camiris} />
-        </Form.Group>
-      </Form>
-    )
-  }
-
-  gainHandler = () => {
-    const gainArr = [0, 3.6, 7.1, 10.7, 14.3, 17.8, 21.4, 25, 28.6, 32.1, 35.7, 39.3, 42.8, 46.4, 50]
-    return (
-          <Form as={Col}>
-            <Form.Group controlId="gainRangeForm">
-              <Form.Label><h4 className="categorySubTitle">Gain</h4> <h5>{gainArr[this.state.exp.exp_camgain - 1]}dB</h5></Form.Label>
-              <Form.Control type="range" min="1" max="15" value={this.state.exp.exp_camgain} />
-            </Form.Group>
-          </Form>
-    )
-  }
-
-  maxGainHandler = () => {
-    const maxGainArr = [10.7, 14.3, 17.8, 21.4, 25, 28.6, 32.1, 35.7, 39.3, 42.8, 46.4, 50]
-    const gainLimit = parseInt(this.state.exp.exp_camgainlimit);
-    return (
-      <Form as={Col}>
-        <Form.Group controlId="gainLimitRangeForm">
-          <Form.Label><h4 className="categorySubTitle">Gain limit</h4><h5>{gainLimit < 4 ? <>Error</> : <>{maxGainArr[gainLimit - 4]}dB</>}</h5></Form.Label>
-          <Form.Control type="range" min="4" max="15" value={gainLimit} />
-        </Form.Group>
-      </Form>
-    )
-  }
-
-  wbHandler = () => {
-    let wbList = {
-      "AUTO": "Auto",
-      "INDOOR": "Indoor (Tungsten)",
-      "OUTDOOR": "Outdoor (Daylight)",
-      "ONEPUSH": "One Push WB",
-      "ATW": "Auto Trace WB",
-      "MANUAL": "Manual",
-      "OUTDOOR-AUTO": "Outdoor Auto",
-      "SLV-AUTO": "Sodium Vapour Lamp Auto",
-      "SLV": "Sodium Vapour Lamp Manual",
-      "SLV-OUTDOOR-AUTO": "Sodium Vapour Lamp Outdoor",
-    }
-    let redGain = this.state.wb.wb_camredgain;
-    let blueGain = this.state.wb.wb_cambluegain;
-    return (
-      <div>
-        <label htmlFor="WB-Mode"><h4 className="categorySubTitle">WB Mode</h4></label>
-        <InputGroup as={Col} className="mb-3">
-          <FormControl
-            id="WB-Mode"
-            placeholder={wbList[this.state.wb.wb_camwb]}
-            defaultValue={wbList[this.state.wb.wb_camwb]}
-            readOnly
-          />
-        </InputGroup>
-        {this.state.wb.wb_camwb === "MANUAL" ? <>
-          <Form>
-            <Form.Group as={Col} controlId="redGainLimitRangeForm">
-              <Form.Label><h6 className="categorySubTitle">Red Gain</h6><h6>{redGain}</h6></Form.Label>
-              <Form.Control type="range" min="0" max="255" value={redGain} />
-            </Form.Group>
-          </Form>
-          <Form>
-            <Form.Group as={Col} controlId="blueGainLimitRangeForm">
-              <Form.Label><h6 className="categorySubTitle">Blue Gain</h6><h6>{blueGain}</h6></Form.Label>
-              <Form.Control type="range" min="0" max="255" value={blueGain} />
-            </Form.Group>
-          </Form>
-        </> : <></>}
-
-      </div>
-    )
-  }
-
-  exposureModeHandler = () => {
-    // console.log("Mode: " + this.state.exp.exp_camexpm)
-    let expModeList = {
-      "FULL-AUTO": "Full Auto",
-      "MANUAL": "Manual",
-      "SHUTTER-PRI": "Shutter Priority",
-      "IRIS-PRI": "Iris Priority",
-      "BRIGHT": "Bright Mode",
-    }
-    return (
-      <>
-        <Form>
-          <Form.Group as={Col} controlId="Camera_Exposure_Mode">
-            <Form.Label><h6 className="categorySubTitle">Exposure</h6></Form.Label>
-            <Form.Control type="text" defaultValue={expModeList[this.state.exp.exp_camexpm]} readOnly>
-            </Form.Control>
-          </Form.Group>
-        </Form>
-      </>
-    )
-  }
-
-  highSensModeHandler = () => {
-    return (
-      <>
-        <Col xs={12}>
-          <h6 className="categorySubTitle">High Sensitivity</h6>
-        </Col>
-        <Col xs={12}>
-          {this.state.exp.exp_camhighsens === "hson" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
-        </Col>
-      </>
-    )
-  }
-
-  IRCutHandler = () => {
-    return (
-      <>
-        <Col xs={12}>
-          <h6 className="categorySubTitle">Infra-Red</h6>
-        </Col>
-        <Col xs={12}>
-          {this.state.pic2.pic2_camircutfil === "circfon" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
-        </Col>
-      </>
-    )
-  }
-
-  bAndWHandler = () => {
-    return (
-      <>
-        <Col xs={12}>
-          <h6 className="categorySubTitle">Black & White</h6>
-        </Col>
-        <Col xs={12}>
-          {this.state.pic1.pic1_cameffect === "efbnw" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
-        </Col>
-      </>
-    )
-  }
-
-  mirrorHandler = () => {
-    return (
-      <>
-        <Col xs={12}>
-          <h6 className="categorySubTitle">Mirror</h6>
-        </Col>
-        <Col xs={12}>
-          {this.state.pic1.pic1_cammirror === "cmon" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
-        </Col>
-      </>
-    )
-  }
-
-  flipHandler = () => {
-    return (
-      <>
-        <Col xs={12}>
-          <h6 className="categorySubTitle">Flip</h6>
-        </Col>
-        <Col xs={12}>
-          {this.state.pic1.pic1_camflip === "cfon" ? <Button size="sm" variant="danger">Enabled</Button> : <Button size="sm" variant="success">Disabled</Button>}
-        </Col>
-      </>
-    )
-  }
-
   connectP200 = (event) => {
     console.log("Connecting!");
     if (this.interval) {
@@ -433,117 +253,30 @@ class App extends Component {
   render() {
     const url = this.state.url;
     return (
-      <div>
+      <div className="App">
         <Container>
-          <Row style={{ height: "150px" }} className="App-header d-flex align-items-center">
-            <Col xs={4}>
-              BirdDog P200<br />Vital Settings Display
-            </Col>
-            <Col xs={4} className="IPAddressArea">
-              <Form onSubmit={this.connectP200.bind(this)}>
-                <Form.Group as={Col}>
-                  <Row>
-                    <InputGroup className="mb-3" size="sm">
-                      <InputGroup.Prepend>
-                        <InputGroup.Text id="prepend">http://</InputGroup.Text>
-                      </InputGroup.Prepend>
-                      <Form.Control
-                        type="text"
-                        name="url"
-                        id="url"
-                        value={url}
-                        onChange={this.handleChange.bind(this)}
-                        placeholder="Enter IP Address"
-                        disabled={this.state.connected === true ? true : false}
-                      />
-                    </InputGroup>
-                  </Row>
-                  <Row>
-                    <Col>
-                      {this.state.connected === false ? <Button variant="success" type="submit">Connect</Button> : <Button variant="danger" onClick={this.disconnect.bind(this)} >Disconnect</Button>}
-                    </Col>
-                  </Row>
-                </Form.Group>
-              </Form>
-            </Col>
-            <Col xs={4}>
-              {this.state.initialLoad === true ? <><Alert variant="info"><Spinner animation="border" variant="info"></Spinner> Loading</Alert></> : <>{this.state.connected === false ? <><Alert variant="danger"><Spinner animation="grow" variant="danger" size="sm"></Spinner><h6 style={{ color: "red" }}>No Connection<br />{this.state.error ? <span>{this.state.error}</span> : <span></span>}</h6></Alert></> : <h6>Camera Detected<br /><Spinner animation="grow" variant="success" size="sm" /> Connected to http://{this.state.url}</h6>}</>
-              }
-            </Col>
+          <Header connectP200={this.connectP200.bind(this)} handleChange={this.handleChange.bind(this)} connected={this.state.connected} initialLoad={this.state.initialLoad} disconnect={this.disconnect.bind(this)} url={url} />
+          <MasterRow av_ndivideo={this.state.av.av_ndivideo} av_videoq3g={this.state.av.av_videoq3g} connected={this.state.connected} />
+          <Row xs={2} sm={3} md={4} lg={5} xl={5}>
+            <WhiteBalance wb_camwb={this.state.wb.wb_camwb} connected={this.state.connected} />
+            <ShutterSpeed region={this.state.region} connected={this.state.connected} exp_camspeed={this.state.exp.exp_camspeed} />
+            <Iris exp_camiris={this.state.exp.exp_camiris} connected={this.state.connected} />
+            <Gain exp_camgain={this.state.exp.exp_camgain} connected={this.state.connected} />
+            <GainLimit exp_camgainlimit={this.state.exp.exp_camgainlimit} connected={this.state.connected} />
           </Row>
-
-          <Row className="cameraCategory">
-            <Col>
-              <h4>Resolution: {this.state.av.av_ndivideo}</h4>
-            </Col>
-            <Col>
-              <h4>NDI Quality: {this.state.av.av_videoq3g}Mbps</h4>
-            </Col>
-          </Row>
-          <hr />
-          <Row className="">
-            <Col className="cameraCategory">
-              <Row>
-                {this.wbHandler()}
+          {this.state.connected === true ?
+            <>
+              <hr />
+              <Row xs={2} sm={3} md={4} lg={5} xl={6}>
+                <Exposure exp_camexpm={this.state.exp.exp_camexpm} connected={this.state.connected} />
+                <HighSensitivity exp_camhighsens={this.state.exp.exp_camhighsens} connected={this.state.connected} />
+                <InfraRed pic2_camircutfil={this.state.pic2.pic2_camircutfil} connected={this.state.connected} />
+                <BlackWhite pic1_cameffect={this.state.pic1.pic1_cameffect} connected={this.state.connected} />
+                <Mirror pic1_cammirror={this.state.pic1.pic1_cammirror} connected={this.state.connected} />
+                <Flip pic1_camflip={this.state.pic1.pic1_camflip} connected={this.state.connected} />
               </Row>
-              <Row>
-                {/* Colour temp - {this.state.wb.wb_camcolortemp} - Unknown */}
-              </Row>
-            </Col>
-            <Col className="cameraCategory">
-              <Row>
-                {this.shutterSpeedHandler()}
-              </Row>
-            </Col>
-            <Col className="cameraCategory">
-              <Row>
-                {this.irisHandler()}
-              </Row>
-            </Col>
-            <Col className="cameraCategory">
-              <Row>
-                {this.gainHandler()}
-              </Row>
-            </Col>
-            <Col className="cameraCategory">
-              <Row>
-                {this.maxGainHandler()}
-              </Row>
-            </Col>
-          </Row>
-          <hr />
-          <Row>
-            <Col xs="2" className="settingWindow">
-              <Row>
-                {this.exposureModeHandler()}
-              </Row>
-            </Col>
-            <Col xs="2" className="settingWindow">
-              <Row>
-                {this.highSensModeHandler()}
-              </Row>
-            </Col>
-            <Col xs="2" className="settingWindow">
-              <Row>
-                {this.IRCutHandler()}
-              </Row>
-            </Col>
-            <Col xs="2" className="settingWindow">
-              <Row>
-                {this.bAndWHandler()}
-              </Row>
-            </Col>
-            <Col xs="2" className="settingWindow">
-              <Row>
-                {this.mirrorHandler()}
-              </Row>
-            </Col>
-            <Col xs="2" className="settingWindow">
-              <Row>
-                {this.flipHandler()}
-              </Row>
-            </Col>
-          </Row>
+            </>
+            : <></>}
         </Container>
         <Footer />
       </div>

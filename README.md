@@ -32,12 +32,20 @@ Here is the file: {insert Dropbox link}
 
 #### Changelog
 
-v0.2.1 - 17/12/2020
-- Moved App to Electron, allowing it to be run on local machines far more cleanly than the App the day before.
+v0.2.2 - 17/12/2020
+- Moved App to Electron, allowing it to be run on local machines far more cleanly than the App the day before. I will still publish a standalone web build as well.
 - Tweaked some stuff to make it prettier
 - Altered the IP input field, you no longer need to add http:// - The prepend hopefully makes that clear
+- Refactored a lot of code, separating each item into their own file. Makes it easier to track bugs and tweak, and massively reduces App.js in size.
 - There is still a lot of work to go!
 
 v0.1.1 - 16/12/2020
 - First serious upload
 - Retooled the Connect/Disconnect functions, now no longer lies to you saying that it is connected when it isn't. Especially with IP's that aren't BirdDogs.
+
+#### Roadmap
+
+Things I'd love to get working in the future
+- Transitions on data change
+- Multiple camera inputs
+- Open to suggestions!
