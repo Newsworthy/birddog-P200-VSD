@@ -1,8 +1,8 @@
 {
-  "name": "birddog-p200-visual-settings-display",
-  "author": "Nick Smith",
+  "name": "BirdDog P200 - Vital Settings Display",
+  "author": "Nick Smith - development@newsworthyvision.com",
   "description": "This is a near real-time display of the major settings of the BirdDog P200 camera, using their internal API",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "homepage": "./",
   "main": "public/start-electron.js",
