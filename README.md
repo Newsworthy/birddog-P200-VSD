@@ -6,7 +6,7 @@ Also, sometimes it's just good to know if you've accidentally engaged the IR cut
 
 ## So I built the "BirdDog P200 VSD"
 
-This is a project built in React, and now encapsulated within Electron. Currently this is Windows only, looking to enable it cross platform soon.
+This is a project built in React, and now encapsulated within Electron. This configured to work on both Windows and Mac now.
 
 It only receives information from the camera, and does not send information to it. No camera settings can or will be modified by this app whatsoever. It polls the cameras API once every second for the latest information.
 
