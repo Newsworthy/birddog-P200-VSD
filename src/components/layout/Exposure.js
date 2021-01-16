@@ -14,13 +14,14 @@ class Exposure extends Component {
       <>
         <Form>
           <Form.Group as={Col} controlId="Camera_Exposure_Mode">
-            <Form.Label><h6 className="categorySubTitle">Exposure</h6></Form.Label>
+            <Form.Label>
+              <h6 className="categorySubTitle">Exposure</h6>
+            </Form.Label>
             <Form.Control
-              size="sm"
               type="text"
               placeholder={expModeList[this.props.exp_camexpm]}
-              readOnly>
-            </Form.Control>
+              readOnly
+            />
           </Form.Group>
         </Form>
       </>

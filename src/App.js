@@ -37,10 +37,11 @@ class App extends Component {
       loading: false,
       error: '',
       refreshSpeed: 1000,
-      region: '',
+      region: '50',
       tempurl: '',
       initialLoad: false,
     }
+    clearInterval(this.interval);
   }
 
   loadAVData = async () => {
@@ -187,19 +188,18 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    clearInterval(this.interval);
-    this.setState({
-      error: '',
-      connected: false,
-      loading: false,
-    })
-  }
+  // componentDidMount() {
+  //   clearInterval(this.interval);
+  //   this.setState({
+  //     error: '',
+  //     connected: false,
+  //     loading: false,
+  //   })
+  // }
 
   connectP200 = (event) => {
     console.log("Connecting!");
     if (this.interval) {
-      // console.log("Interval found! Clearing!")
       clearInterval(this.interval);
     }
     event.preventDefault();
@@ -258,22 +258,22 @@ class App extends Component {
           <Header connectP200={this.connectP200.bind(this)} handleChange={this.handleChange.bind(this)} connected={this.state.connected} initialLoad={this.state.initialLoad} disconnect={this.disconnect.bind(this)} url={url} />
           <MasterRow av_ndivideo={this.state.av.av_ndivideo} av_videoq3g={this.state.av.av_videoq3g} connected={this.state.connected} />
           <Row xs={2} sm={3} md={4} lg={5} xl={5}>
-            <WhiteBalance wb_camwb={this.state.wb.wb_camwb} connected={this.state.connected} />
-            <ShutterSpeed region={this.state.region} connected={this.state.connected} exp_camspeed={this.state.exp.exp_camspeed} />
-            <Iris exp_camiris={this.state.exp.exp_camiris} connected={this.state.connected} />
-            <Gain exp_camgain={this.state.exp.exp_camgain} connected={this.state.connected} />
-            <GainLimit exp_camgainlimit={this.state.exp.exp_camgainlimit} connected={this.state.connected} />
+            <WhiteBalance wb_camwb={this.state.wb.wb_camwb} wb_cambluegain={this.state.wb.wb_cambluegain} wb_camredgain={this.state.wb.wb_camredgain} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+            <ShutterSpeed region={this.state.region} connected={this.state.connected} exp_camspeed={this.state.exp.exp_camspeed} handleChange={this.handleChange.bind(this)} />
+            <Iris exp_camiris={this.state.exp.exp_camiris} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+            <Gain exp_camgain={this.state.exp.exp_camgain} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+            <GainLimit exp_camgainlimit={this.state.exp.exp_camgainlimit} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
           </Row>
           {this.state.connected === true ?
             <>
               <hr />
               <Row xs={2} sm={3} md={4} lg={5} xl={6}>
-                <Exposure exp_camexpm={this.state.exp.exp_camexpm} connected={this.state.connected} />
-                <HighSensitivity exp_camhighsens={this.state.exp.exp_camhighsens} connected={this.state.connected} />
-                <InfraRed pic2_camircutfil={this.state.pic2.pic2_camircutfil} connected={this.state.connected} />
-                <BlackWhite pic1_cameffect={this.state.pic1.pic1_cameffect} connected={this.state.connected} />
-                <Mirror pic1_cammirror={this.state.pic1.pic1_cammirror} connected={this.state.connected} />
-                <Flip pic1_camflip={this.state.pic1.pic1_camflip} connected={this.state.connected} />
+                <Exposure exp_camexpm={this.state.exp.exp_camexpm} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+                <HighSensitivity exp_camhighsens={this.state.exp.exp_camhighsens} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+                <InfraRed pic2_camircutfil={this.state.pic2.pic2_camircutfil} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+                <BlackWhite pic1_cameffect={this.state.pic1.pic1_cameffect} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+                <Mirror pic1_cammirror={this.state.pic1.pic1_cammirror} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
+                <Flip pic1_camflip={this.state.pic1.pic1_camflip} connected={this.state.connected} handleChange={this.handleChange.bind(this)} />
               </Row>
             </>
             : <></>}

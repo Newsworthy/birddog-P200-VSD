@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 
 class InfraRed extends Component {
+  IRCutToggle = () => {
+    
+  }
+
   IRCutHandler = () => {
     return (
       <>
