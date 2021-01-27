@@ -32,6 +32,11 @@ You can find the .exe file in the releases section, as well as the original Reac
 
 #### Changelog
 
+v.0.2.3 - 27/01/2021
+- Fixed some bad display in the white balance section. It's not perfect but it'll do.
+- Refactored quite a lot of code, cut down on duplication.
+- Got rid of some annoying React errors. 
+
 v0.2.2 - 17/12/2020
 - Moved App to Electron, allowing it to be run on local machines far more cleanly than the App the day before. I will still publish a standalone web build as well.
 - Tweaked some stuff to make it prettier
